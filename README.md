@@ -1,6 +1,8 @@
-# openshift-3-demo
-#OpenShift 3 demonstration
+##OpenShift 3 demonstration
 
+# Usecase 1 : There is an existing application code in your github/gitlab repo and you want to deploy it on your choice of application server(JBoss EAP) running on OpenShift.
+
+Source-To-Image (S2I) is a standalone tool which is very useful when creating builder images. As the name suggests we will be taking the source code from our git repository and will create a docker image using it. Once image is created we can assign this image to a container, which would be running the version of the code which we fed to S2I.
 
 OpenShift Allows to create applications wither using `oc` command line utility or directly through the management console. First it requires a project to be created, which contains the applications, services and routes. 
 
@@ -18,11 +20,11 @@ Here is how you can create a project and an application using `oc` utility.
 
 You can also create the project and application from thre management console, as shown below :
 
-1) Login to management console with your credentials and create a project.
+Login to management console with your credentials and create a project.
 
 <img width="1440" alt="screen shot 2016-05-28 at 10 33 52 am" src="https://cloud.githubusercontent.com/assets/1744307/15631217/f66629ce-257a-11e6-98b1-73b9515a56d6.png">
 
-2) Now add an application to your newly created project. You see below templates which you can choose from as your base image:
+Now add an application to your newly created project. You see below templates which you can choose from as your base image:
 
 <img width="1440" alt="screen shot 2016-05-28 at 10 36 26 am" src="https://cloud.githubusercontent.com/assets/1744307/15631236/0196ab4c-257c-11e6-9a7f-bf2f8cc32a65.png">
 
@@ -55,7 +57,7 @@ oc logs <pod name>
 ```
 <img width="1440" alt="screen shot 2016-05-28 at 6 13 58 pm" src="https://cloud.githubusercontent.com/assets/1744307/15629672/d8dfe55e-253c-11e6-9955-83a35db1a95a.png">
 
-Now the build is successful and finished. Let's run <oc get pods> again and we can see OpenShift has triggered a deployment. You can tail the logs again if you wish.
+Now the build is successful and finished. Let's run `oc get pods` again and we can see OpenShift has triggered a deployment. You can tail the logs again if you wish.
 
 <img width="526" alt="screen shot 2016-05-28 at 6 15 34 pm" src="https://cloud.githubusercontent.com/assets/1744307/15629678/f456ca14-253c-11e6-9602-43e13de49cd2.png">
 
