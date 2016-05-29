@@ -73,4 +73,44 @@ Done. You have a application running in cloud !! :)
 
 
 
+#Usecase 2 : You already have an application running on OpenShift and want to perform incremental builds via Git webhooks.
 
+1) Developers tend to immidiately test their latest codebase by quickly deploying developer branch to the server
+2) OR once the changes are verified and merged to the master, you immidiately want to push the code to the server
+
+This is easy with OpenShift 3. As soon as you create an application a git webhook is generated (unless you have disabled it explicitly) and you can add it to your github repository.
+
+Navigate to your application's builds and copy the git web-hook url :
+
+<img width="1440" alt="screen shot 2016-05-29 at 10 39 37 am" src="https://cloud.githubusercontent.com/assets/1744307/15631467/b20de172-2589-11e6-83d1-259930ef171d.png">
+
+Login to your github/gitlab repo and navigate to settings:
+
+<img width="1440" alt="screen shot 2016-05-28 at 5 43 55 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631431/39a29c56-2588-11e6-9756-0c7f35c2f6f7.png">
+
+Click on `Add Webhook` and paste the url, which we figured from our application's build settings, somrthing like below : 
+
+https://master.openshift.com:8443/oapi/v1/namespaces/development/buildconfigs/kitchensink/webhooks/d4aeaa1fd59beab2/github
+
+<img width="1440" alt="screen shot 2016-05-28 at 5 45 07 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631501/efb00504-258a-11e6-8ebe-c9c631f07a7f.png">
+
+Keep remaining options as default. I have `Disabled SSL verification` for my application. Save the settings and that's it.
+
+Here is my current index page :
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 18 14 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631523/d95027d4-258b-11e6-9d6c-ef8b8f7b028f.png">
+
+
+Edit your code and push to your git repository. Immidiately GitHub sends a REST call to OpenShift Master Server notifying about the event and a new build is triggered.
+
+You can verify the new build triggered from management console :
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 26 22 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631505/2819ed38-258b-11e6-9d88-7c378704bed1.png">
+
+Click on `view logs` if you wish to.
+
+Once build and deployment is over, you can see the changes :
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 30 33 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631525/1075a946-258c-11e6-91e8-cbb80af7fd9f.png">
+
+Remember, I have configured my app to use `master` branch as Source for S2I build. You can have multiple branches like dev/qa etc. Once they are merged with master the build gets triggered automatically and then deploys the latest version.
