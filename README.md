@@ -114,3 +114,65 @@ Once build and deployment is over, you can see the changes :
 <img width="1440" alt="screen shot 2016-05-28 at 6 30 33 pm" src="https://cloud.githubusercontent.com/assets/1744307/15631525/1075a946-258c-11e6-91e8-cbb80af7fd9f.png">
 
 Remember, I have configured my app to use `master` branch as Source for S2I build. You can have multiple branches like dev/qa etc. Once they are merged with master the build gets triggered automatically and then deploys the latest version.
+
+
+
+#Usecase 3 : Use Jenkins for Continuous Integration and Continuos Deployment. 
+
+Use Jenkins image for CI/CD flow. Follow below steps :
+
+```
+ oc new-project ci
+ oc new-app library/jenkins:2.0
+ oc expose svc jenkins
+```
+
+Login to OpenShift Management Console and you see the Jenkins app created and the route for thr same.
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 41 33 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655407/8c00e966-26ba-11e6-9a7b-e293cc4f1512.png">
+
+Tail the logs using `oc get pods` and `oc logs <pod-name>`.
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 42 46 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655413/98da8304-26ba-11e6-8611-c22b12a159cd.png">
+
+Save the seceret as shown in the image for login purpose. Then install the necessary plugins for creating CD/CI flow.
+
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 46 23 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655419/ad9810ae-26ba-11e6-9e53-1abac6c5aa75.png">
+
+OpenShift Pipeline Plugin is an important one here :
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 52 05 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655434/c667c1d8-26ba-11e6-8e75-b7d5c7979a85.png">
+
+
+Installing those plugin are also the builds running of jenkins. Fascinating isn't it :)
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 46 32 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655444/e551e0ec-26ba-11e6-889b-6256978d92ef.png">
+
+Once done quickly create an admin user
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 50 35 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655498/5eae07a4-26bb-11e6-80a8-99b38d67c829.png">
+
+
+And then login to Jenkins UI
+
+<img width="1440" alt="screen shot 2016-05-28 at 6 51 10 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655515/7f40678c-26bb-11e6-99c8-464b6524d987.png">
+
+Create a Pipeline with below groovy script :
+
+<img width="1440" alt="screen shot 2016-05-28 at 7 13 34 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655533/9af130e2-26bb-11e6-884f-39b3661ddded.png">
+
+Start the build and tail the logs :
+
+<img width="1440" alt="screen shot 2016-05-28 at 7 11 03 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655550/b7fd9072-26bb-11e6-8934-5b601bef301e.png">
+
+Check the pipeline building on Jenkins server :
+
+<img width="1074" alt="screen shot 2016-05-30 at 10 49 10 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655563/e339d714-26bb-11e6-92eb-9ab814476430.png">
+
+The application is up and running :
+
+<img width="1440" alt="screen shot 2016-05-30 at 11 21 58 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655745/6128bfc2-26bd-11e6-8ec7-6b75d5d415d4.png">
+
+Jenkins can also monitor the git repository branches and trigger the builds as needed and execute the test cases if any.
+
