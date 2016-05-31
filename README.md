@@ -162,7 +162,11 @@ Create a Pipeline with below groovy script :
 
 <img width="1440" alt="screen shot 2016-05-28 at 7 13 34 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655533/9af130e2-26bb-11e6-884f-39b3661ddded.png">
 
-Start the build and tail the logs :
+Just before you start the build, give the permissions to service account of `ci` project to execute REST api calls on your development project `demo`.
+
+`oc policy add-role-to-user edit system:systemaccount:ci:default -n demo`
+
+Once done start the build and tail the logs :
 
 <img width="1440" alt="screen shot 2016-05-28 at 7 11 03 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655550/b7fd9072-26bb-11e6-8934-5b601bef301e.png">
 
