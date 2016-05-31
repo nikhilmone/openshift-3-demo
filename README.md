@@ -1,5 +1,14 @@
 ##OpenShift 3 demonstration
 
+Please refere below for all the documentation related to OpenShift :
+
+[https://docs.openshift.com/enterprise/3.0/welcome/index.html](https://docs.openshift.com/enterprise/3.0/welcome/index.html)
+
+## OpenShift 3 Architecture :
+
+![ose_arch](https://cloud.githubusercontent.com/assets/1744307/15662767/80054754-2711-11e6-8193-24ec07bcd681.png)
+
+
 # Usecase 1 : There is an existing application code in your github/gitlab repo and you want to deploy it on your choice of application server(JBoss EAP) running on OpenShift.
 
 Source-To-Image (S2I) is a standalone tool which is very useful when creating builder images. As the name suggests we will be taking the source code from our git repository and will create a docker image using it. Once image is created we can assign this image to a container, which would be running the version of the code which we fed to S2I.
