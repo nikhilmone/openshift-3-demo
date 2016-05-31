@@ -158,6 +158,17 @@ And then login to Jenkins UI
 
 <img width="1440" alt="screen shot 2016-05-28 at 6 51 10 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655515/7f40678c-26bb-11e6-99c8-464b6524d987.png">
 
+Create a project `demo` and a new app :
+
+```
+$ oc new-project demo
+$ oc new-app ticket-monster \
+        --param=APPLICATION_NAME=ticket-monster \
+        --param=SOURCE_REPOSITORY_URL=https://github.com/nikhilmone/ticket-monster.git \
+        --param=SOURCE_REPOSITORY_REF=2.7.0.Final \
+        --param=CONTEXT_DIR=demo
+```  
+
 Create a Pipeline with below groovy script :
 
 <img width="1440" alt="screen shot 2016-05-28 at 7 13 34 pm" src="https://cloud.githubusercontent.com/assets/1744307/15655533/9af130e2-26bb-11e6-884f-39b3661ddded.png">
