@@ -82,7 +82,7 @@ Done. You have a application running in cloud !! :)
 
 
 
-#Usecase 2 : You already have an application running on OpenShift and want to perform incremental builds via Git webhooks.
+# Usecase 2 : You already have an application running on OpenShift and want to perform incremental builds via Git webhooks.
 
 1) Developers tend to immidiately test their latest codebase by quickly deploying developer branch to the server
 2) OR once the changes are verified and merged to the master, you immidiately want to push the code to the server
@@ -126,7 +126,7 @@ Remember, I have configured my app to use `master` branch as Source for S2I buil
 
 
 
-#Usecase 3 : Use Jenkins for Continuous Integration and Continuos Deployment. 
+# Usecase 3 : Use Jenkins for Continuous Integration and Continuos Deployment. 
 
 Use Jenkins image for CI/CD flow. Follow below steps :
 
